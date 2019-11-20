@@ -1,0 +1,30 @@
+#post-content {
+  border: 1px solid #00203fff;
+  opacity: 0.8;
+  border-radius: 4px;
+  margin: 10px;
+  padding: 4px 8px;
+  background-color: #00203fff;
+  box-shadow: 3px 3px 4px #242f494a;
+  width: 100%;
+}
+
+#post-content > h1 {
+  text-transform: capitalize;
+  color: #adefd1ff;
+}
+
+#post-content > h1::after {
+  position: absolute;
+  white-space: nowrap;
+  content: ' |';
+  color: cadetblue;
+  margin-left: 2px;
+}
+
+#post-content > p {
+  font-size: medium;
+  font-family: cursive;
+  color: #ffffff;
+  padding: 2px 0px 0px 12px;
+}

@@ -1,22 +1,29 @@
-.App {
-  text-align: center;
+#selectise-wrapper {
+  margin: 8px;
+  border-radius: 8px;
+  margin: 8px;
+  box-shadow: 0px 3px 4px #00000052;
+}
+#selectise-wrapper > .selectise-input {
+  border: 1px solid #222222;
+  border-radius: 6px 6px 0px 0px;
+  line-height: 3em;
+  padding: 2px 8px;
+  width: 100%;
+}
+#selectise-wrapper > .selectise-options {
+  border: 1px solid #222222;
+  width: 100%;
+  border-radius: 0px 0px 6px 6px;
+  line-height: 3em;
+  padding: 2px 8px;
+  display: block;
+  border-top: 0px;
 }
 
-.App-logo {
-  height: 40vmin;
+#selectise-wrapper > .selectise-options:focus {
+  outline: none;
 }
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #09d3ac;
+#selectise-wrapper > .selectise-input:focus {
+  outline: none;
 }
