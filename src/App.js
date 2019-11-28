@@ -2,7 +2,9 @@ import React from 'react';
 import { Container, Row, Col } from 'reactstrap';
 import axios from 'axios';
 import { Post } from './Components/Post.jsx'
+import { Button } from 'reactstrap';
 import './App.css';
+import { User } from './Components/User.jsx';
 
 
 class App extends React.Component {
@@ -12,7 +14,8 @@ class App extends React.Component {
       users: [],
       posts: [],
       selectedUser: null,
-      filterText: ""
+      filterText: "",
+      sideModal: true
     };
   }
 
@@ -29,6 +32,7 @@ class App extends React.Component {
 
   setSelectUser(id) {
     this.setState({ selectedUser: id });
+
     axios({
       method: 'get',
       url: `https://jsonplaceholder.typicode.com/posts?userId=${id}`
@@ -37,9 +41,12 @@ class App extends React.Component {
       .catch(err => console.log(err));
   }
 
+  removePopup() {
+    this.setState({ sideModal: false });
+  }
 
   render() {
-    const { users, selectedUser, posts, filterText } = this.state;
+    const { users, selectedUser, posts, filterText, sideModal } = this.state;
     return (
       <>
         <Container>
@@ -64,13 +71,45 @@ class App extends React.Component {
               </div>
             </Col>
           </Row>
-          <Row className="row-fluid" >
+
+          {sideModal && selectedUser && <Row>
+            <Col className={sideModal ? `slide-in-right` : `slide-out-right`} style={this.popUpStyle}>
+              <div style={{ minHeight: '200px' }}>
+                {users
+                  .filter(user => (user.id == selectedUser))
+                  .map(user => <User key={user.id} user={user}></User>)}
+              </div>
+              <Button onClick={e => this.removePopup()} color="info">Close</Button>
+            </Col>
+          </Row>}
+
+          <Row className="row-fluid">
             {posts.map(post => <Post key={post.id} content={post} />)}
           </Row>
         </Container>
+        {/* {filterText.length !== 0 &&
+          users
+            .filter(user => !filterText ? true : user.username.match(new RegExp(filterText, 'ig')))
+            .map(user => <Floater key={user.id} content={JSON.stringify({ user })}>
+              <span>click me</span>
+            </Floater>)
+        } */}
       </>
     );
   }
+
+
+  popUpStyle = {
+    background: '#adefd1ff',
+    minHeight: '250px',
+    position: 'fixed',
+    top: '100px',
+    left: '78.125vw',
+    zIndex: '10',
+    padding: '10px',
+    borderRadius: '5px',
+  }
+
 }
 
 export default App;
